@@ -34,10 +34,11 @@ function LeaderBoardScreen({ navigation }) {
 class App extends Component {
   state = {
   };
-
+  
 
   render() {
     const Tab = createBottomTabNavigator();
+
     return (
       <NavigationContainer>
       <Tab.Navigator

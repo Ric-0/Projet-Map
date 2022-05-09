@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, PermissionsAndroid } from 'react-native';
 import MapView from 'react-native-maps';
 import { Dimensions } from 'react-native';
 import { Marker } from "react-native-maps";
@@ -24,6 +24,34 @@ const getDirections = async (startLoc, destinationLoc) => {
     return coords;
   } catch (error) {
     return error;
+  }
+};
+
+let avisUser = null;
+
+const requestCameraPermission = async () => {
+  try {
+    console.log(avisUser);
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Cool Photo App Camera Permission",
+        message:
+          "Cool Photo App needs access to your camera " +
+          "so you can take awesome pictures.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK"
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      avisUser = true;
+      console.log(avisUser);
+    } else {
+      console.log("Camera permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
   }
 };
 
@@ -251,6 +279,9 @@ export default function app() {
   const [coords, setCoords] = useState([]);
 
   useEffect(() => {
+    console.log(avisUser);
+    requestCameraPermission();
+    console.log(avisUser);
     //fetch the coordinates and then store its value into the coords Hook.
     getDirections("52.5200066,13.404954", "50.1109221,8.6821267")
       .then(coords => setCoords(coords))
