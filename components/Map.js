@@ -33,20 +33,11 @@ const requestCameraPermission = async () => {
   try {
     console.log(avisUser);
     const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      {
-        title: "Cool Photo App Camera Permission",
-        message:
-          "Cool Photo App needs access to your camera " +
-          "so you can take awesome pictures.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
-      }
-    );
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       avisUser = true;
       console.log(avisUser);
+      console.log('test');
     } else {
       console.log("Camera permission denied");
     }
