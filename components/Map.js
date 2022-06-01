@@ -29,23 +29,6 @@ const getDirections = async (startLoc, destinationLoc) => {
 
 let avisUser = null;
 
-const requestCameraPermission = async () => {
-  try {
-    console.log(avisUser);
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      avisUser = true;
-      console.log(avisUser);
-      console.log('test');
-    } else {
-      console.log("Camera permission denied");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
 
 const mapStyle = [
   {
